@@ -51,8 +51,12 @@ const SiteHeader = () => {
 >
         <Toolbar>
 
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
-            TMDB Client
+          <Typography
+            variant="h4"
+            sx={{ flexGrow: 1, cursor: "pointer" }}
+            onClick={() => handleMenuSelect("/")}
+          >  
+          TMDB Client
           </Typography>
 
           <Typography variant="h6" sx={{ flexGrow: 1 }}>

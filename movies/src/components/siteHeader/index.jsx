@@ -26,7 +26,7 @@ const SiteHeader = () => {
     { label: "Top Rated", path: "/movies/topRated" },
     { label: "Popular", path: "/movies/popular" },
     { label: "Now Playing", path: "/movies/nowPlaying" },
-    { label: "Option 6", path: "/movies/option6" },
+    { label: "Irish Movies", path: "/movies/irish" },
   ];
 
   const handleMenuSelect = (pageURL) => {

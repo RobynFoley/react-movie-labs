@@ -21,7 +21,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {  // Don't miss this!
+const MovieDetails = ({ movie, credits }) => {  // Don't miss this!
 const [drawerOpen, setDrawerOpen] = useState(false);
 
 
@@ -90,6 +90,24 @@ const [drawerOpen, setDrawerOpen] = useState(false);
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+    <h2>Cast & Actors</h2>
+
+    {credits?.cast?.slice(0, 10).map((actor) => (
+      <div key={actor.id}>
+        {actor.profile_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+            alt={actor.name}
+          />
+        ) : (
+          <p>No image available</p>
+        )}
+
+        <p>{actor.name}</p>
+        <p>Playing: {actor.character}</p>
+      </div>
+    ))}
+     
 
       </>
   );

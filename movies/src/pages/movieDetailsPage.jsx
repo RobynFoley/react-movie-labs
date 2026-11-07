@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
 //import useMovie from "../hooks/useMovie";
-import { getMovie } from '../api/tmdb-api'
+import { getMovie, getMovieCredits } from '../api/tmdb-api'
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner'
 // import useMovie from "../hooks/useMovie";   Redundant
@@ -14,6 +14,12 @@ const MoviePage = (props) => {
     queryKey: ['movie', {id: id}],
     queryFn: getMovie,
   })
+  
+const { data: credits } = useQuery({
+  queryKey: ["movieCredits", { id }],
+  queryFn: getMovieCredits,
+  enabled: !!id,
+});
 
   if (isPending) {
     return <Spinner />;
@@ -28,7 +34,7 @@ const MoviePage = (props) => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
+            <MovieDetails movie={movie}   credits={credits} />
           </PageTemplate>
         </>
       ) : (

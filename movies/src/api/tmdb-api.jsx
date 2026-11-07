@@ -112,3 +112,14 @@ export const getTopRatedMovies = (id) => {
     });
 };
 
+export const getPopularMovies = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      // console.log(json.results);
+      return json.results;
+    });
+};
+

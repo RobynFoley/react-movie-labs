@@ -13,8 +13,13 @@ const SimilarMoviesPage = () => {
     queryFn: getMovie,
   });
 
-  if (isPending) return <Spinner />;
-  if (isError) return <p>{error.message}</p>;
+    if (isPending) {
+      return <Spinner />
+    }
+  
+    if (isError) {
+      return <h1>{error.message}</h1>
+    }
 
   return <SimilarMovies movie={movie} />;
 };

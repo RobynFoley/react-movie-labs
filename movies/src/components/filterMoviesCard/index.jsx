@@ -13,7 +13,10 @@ import React, {useState, useEffect}  from "react";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 
 
 const formControl = 
@@ -79,7 +82,6 @@ export default function FilterMoviesCard(props) {
     />
 
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label" >Genre</InputLabel>
             <Select
     labelId="genre-label"
     id="genre-select"
@@ -97,19 +99,54 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+        <FormControl sx={{ ...formControl }}>
+  <InputLabel id="rating-label">Minimum Rating</InputLabel>
+  <Select
+    labelId="rating-label"
+    value={props.ratingFilter}
+    label="Minimum Rating"
+    onChange={(e) =>
+      handleChange(e, "rating", e.target.value)
+    }
+  >
+    <MenuItem value="">Any Rating</MenuItem>
+    <MenuItem value="5">5+</MenuItem>
+    <MenuItem value="6">6+</MenuItem>
+    <MenuItem value="7">7+</MenuItem>
+    <MenuItem value="8">8+</MenuItem>
+    <MenuItem value="9">9+</MenuItem>
+  </Select>
+</FormControl>
+ <FormControl sx={{ ...formControl }}>
+  <InputLabel id="sort-label">Sort By</InputLabel>
+  <Select
+    labelId="sort-label"
+    value={props.sortOrder}
+    label="Sort By"
+    onChange={(e) =>
+      handleChange(e, "sort", e.target.value)
+    }
+  >
+    <MenuItem value="">
+      Default Order
+    </MenuItem>
+
+    <MenuItem value="newest">
+      Newest to Oldest
+    </MenuItem>
+
+    <MenuItem value="oldest">
+      Oldest to Newest
+    </MenuItem>
+  </Select>
+</FormControl>
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
         image={img}
         title="Filter"
       />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
-      </CardContent>
+
     </Card>
   );
 }

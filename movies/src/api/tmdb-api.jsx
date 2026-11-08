@@ -14,6 +14,22 @@ export const getMovies = (page = 1 ) => {
   });
 };
 
+export const getUpcomingMovies = (page = 1) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${page}`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+      throw error
+  });
+};
+
 export const getIrishMovies = (page = 1) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&with_origin_country=IE&page=${page}&sort_by=popularity.desc`
@@ -125,16 +141,7 @@ export const getSimilarMovies = ({ queryKey }) => {
   });
 };
 
-export const getUpcomingMovies = (id) => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      // console.log(json.results);
-      return json.results;
-    });
-};
+
 
 export const getTopRatedMovies = (id) => {
   return fetch(

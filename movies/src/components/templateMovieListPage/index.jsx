@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import headerBackground from "../../images/background.jpg";
 import Pagination from "@mui/material/Pagination";
 
-function MovieListPageTemplate({ movies, title, action, totalPages,  page, setPage  }) {
+function MovieListPageTemplate({ movies =[], title, action, totalPages,  page, setPage  }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -50,7 +50,7 @@ function MovieListPageTemplate({ movies, title, action, totalPages,  page, setPa
         </Grid>
         <MovieList action={action} movies={displayedMovies} />
 
-        <Grid size={12} sx={{ display: "flex", justifyContent: "center", padding: 3 }}>
+        <Grid size={12} sx={{ display: "flex", justifyContent: "center", padding: 2, background: "white" }}>
         <Pagination
         count={totalPages}
         page={page}

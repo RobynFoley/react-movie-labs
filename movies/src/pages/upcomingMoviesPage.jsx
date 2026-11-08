@@ -2,15 +2,24 @@ import { useState, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '../components/spinner';
 
 const UpcomingPage = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    getUpcomingMovies().then((movies) => {
-      setMovies(movies);
-    });
-  }, []);
+  const [page, setPage] = useState(1);
+  const { data, error, isPending, isError  } = useQuery({
+    queryKey: ['upcoming', page],
+    queryFn: () => getUpcomingMovies(page),
+  })
+    if (isPending) {
+      return <Spinner />
+    }
+  
+    if (isError) {
+      return <h1>{error.message}</h1>
+    }
+  
+  const movies = data.results;
 
   return (
     <PageTemplate
@@ -19,6 +28,9 @@ const UpcomingPage = () => {
       action={(movie) => {
         return <AddToPlaylistIcon movie={movie} />;
       }}
+        totalPages={data.total_pages}
+        page={page}
+        setPage={setPage}
     />
   );
 };

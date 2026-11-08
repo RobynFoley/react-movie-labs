@@ -13,7 +13,10 @@ import React, {useState, useEffect}  from "react";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 
 
 const formControl = 
@@ -97,6 +100,29 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+ <FormControl sx={{ ...formControl }}>
+  <InputLabel id="sort-label">Sort By</InputLabel>
+  <Select
+    labelId="sort-label"
+    value={props.sortOrder}
+    label="Sort By"
+    onChange={(e) =>
+      handleChange(e, "sort", e.target.value)
+    }
+  >
+    <MenuItem value="">
+      Default Order
+    </MenuItem>
+
+    <MenuItem value="newest">
+      Newest to Oldest
+    </MenuItem>
+
+    <MenuItem value="oldest">
+      Oldest to Newest
+    </MenuItem>
+  </Select>
+</FormControl>
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}

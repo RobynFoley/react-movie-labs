@@ -9,6 +9,7 @@ import Pagination from "@mui/material/Pagination";
 function MovieListPageTemplate({ movies =[], title, action, totalPages,  page, setPage  }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [sortOrder, setSortOrder] = useState("");  
   const genreId = Number(genreFilter);
   let displayedMovies = movies
     .filter((m) => {
@@ -17,13 +18,23 @@ function MovieListPageTemplate({ movies =[], title, action, totalPages,  page, s
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
+if (sortOrder === "newest") {
+  displayedMovies.sort(
+    (a, b) => new Date(b.release_date) - new Date(a.release_date)
+  );
+} else if (sortOrder === "oldest") {
+  displayedMovies.sort(
+    (a, b) => new Date(a.release_date) - new Date(b.release_date)
+  );
+}
   
 
   const handleChange = (type, value) => {
     setPage(1);
 
     if (type === "name") setNameFilter(value);
-    else setGenreFilter(value);
+  else if (type === "genre") setGenreFilter(value);
+  else if (type === "sort") setSortOrder(value);
   };
 
   return (
@@ -46,6 +57,8 @@ function MovieListPageTemplate({ movies =[], title, action, totalPages,  page, s
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            sortOrder={sortOrder}
+
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies} />

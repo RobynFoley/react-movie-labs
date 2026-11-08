@@ -28,9 +28,9 @@ const UpcomingPage = () => {
       action={(movie) => {
         return <AddToPlaylistIcon movie={movie} />;
       }}
-        totalPages={data.total_pages}
-        page={page}
-        setPage={setPage}
+      totalPages={data.total_pages}
+      page={page}
+      setPage={setPage}
     />
   );
 };

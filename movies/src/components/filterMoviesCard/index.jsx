@@ -82,7 +82,6 @@ export default function FilterMoviesCard(props) {
     />
 
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label" >Genre</InputLabel>
             <Select
     labelId="genre-label"
     id="genre-select"
@@ -100,6 +99,24 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+        <FormControl sx={{ ...formControl }}>
+  <InputLabel id="rating-label">Minimum Rating</InputLabel>
+  <Select
+    labelId="rating-label"
+    value={props.ratingFilter}
+    label="Minimum Rating"
+    onChange={(e) =>
+      handleChange(e, "rating", e.target.value)
+    }
+  >
+    <MenuItem value="">Any Rating</MenuItem>
+    <MenuItem value="5">5+</MenuItem>
+    <MenuItem value="6">6+</MenuItem>
+    <MenuItem value="7">7+</MenuItem>
+    <MenuItem value="8">8+</MenuItem>
+    <MenuItem value="9">9+</MenuItem>
+  </Select>
+</FormControl>
  <FormControl sx={{ ...formControl }}>
   <InputLabel id="sort-label">Sort By</InputLabel>
   <Select
@@ -129,13 +146,7 @@ export default function FilterMoviesCard(props) {
         image={img}
         title="Filter"
       />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
-      </CardContent>
+
     </Card>
   );
 }

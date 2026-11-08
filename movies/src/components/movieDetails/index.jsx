@@ -88,8 +88,20 @@ const scrollCast = (direction) => {
             <Chip label={g.name} sx={{...chip}} />
           </li>
         ))}
+    
       </Paper>
-      
+          <Fab
+  color="primary"
+  variant="extended"
+  onClick={() => navigate(`/movies/${movie.id}/similar`)}
+  sx={{
+    position: "fixed",
+    bottom: "6em",
+    right: "1em",
+  }}
+>
+  Similar Movies
+</Fab>
            <Fab
         color="secondary"
         variant="extended"

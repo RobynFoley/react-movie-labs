@@ -25,7 +25,15 @@ export default function MovieCard({ movie, action }) {
   const isWatchLater = playlist.includes(movie.id);
 
   return (
-    <Card>
+    <Card
+         sx={{
+            transition: "transform 0.3s ease",
+
+            "&:hover": {
+              transform: "translateY(-5px)",
+              boxShadow: 6,
+            },
+          }}>
       <CardHeader
         avatar={
           <>

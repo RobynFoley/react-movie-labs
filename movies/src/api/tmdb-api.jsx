@@ -162,3 +162,36 @@ export const getMovieCredits = ({ queryKey }) => {
     return response.json();
   });
 };
+
+// Get actor details
+export const getActor = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  });
+};
+
+// Get actor's movie credits
+export const getActorMovies = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  });
+};
+

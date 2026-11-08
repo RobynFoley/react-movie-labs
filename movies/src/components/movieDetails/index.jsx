@@ -16,6 +16,7 @@ import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useNavigate } from "react-router";
 
 const root = {
     display: "flex",
@@ -26,8 +27,8 @@ const root = {
     margin: 0,
 };
 const chip = { margin: 0.5 };
-
 const MovieDetails = ({ movie, credits }) => {  // Don't miss this!
+const navigate = useNavigate();
 const [drawerOpen, setDrawerOpen] = useState(false);
 const castRef = useRef(null);
 
@@ -135,18 +136,21 @@ const scrollCast = (direction) => {
   >
     {credits?.cast?.slice(0, 10).map((actor) => (
       <Card
-        key={actor.id}
-        sx={{
-          minWidth: 150,
-          maxWidth: 150,
-          flexShrink: 0,
-          "&:hover": {
-            transform: "scale(1.05)",
-            boxShadow: 6,
+          key={actor.id}
+          onClick={() => navigate(`/actor/${actor.id}`)}
+          sx={{
+            minWidth: 150,
+            maxWidth: 150,
+            flexShrink: 0,
             cursor: "pointer",
-          },
-        }}
-      >
+            transition: "transform 0.3s ease",
+
+            "&:hover": {
+              transform: "translateY(-5px)",
+              boxShadow: 6,
+            },
+          }}
+        >
         {actor.profile_path ? (
           <CardMedia
             component="img"

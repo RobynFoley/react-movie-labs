@@ -42,6 +42,11 @@ const addReview = (movie, review) => {
   };
    console.log(playlist)
 
+const removeFromPlaylist = (movie) => {
+  setPlaylist(
+    playlist.filter((mId) => mId !== movie.id)
+  );    
+};
   return (
     <MoviesContext.Provider
       value={{
@@ -50,6 +55,7 @@ const addReview = (movie, review) => {
         removeFromFavorites,
         addReview,
         addToPlaylist,
+        removeFromPlaylist,
         playlist
       }}
     >

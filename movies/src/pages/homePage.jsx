@@ -3,12 +3,13 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import { useState, useEffect } from "react";
 
 const HomePage = (props) => {
-
+  const [page, setPage] = useState(1);
   const { data, error, isPending, isError  } = useQuery({
-    queryKey: ['discover'],
-    queryFn: getMovies,
+    queryKey: ['discover', page],
+    queryFn: () => getMovies(page),
   })
   
   if (isPending) {
@@ -33,6 +34,10 @@ const HomePage = (props) => {
         action={(movie) => {
           return <AddToFavoritesIcon movie={movie} />
         }}
+        totalPages={data.total_pages}
+        page={page}
+        setPage={setPage}
+
       />
   );
 
